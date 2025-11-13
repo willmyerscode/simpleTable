@@ -5,9 +5,11 @@
 **/
 
 [data-wm-plugin="simple-table"] .table-wrapper {
-  width: var(--simple-table-width), 100%;
   margin: auto;
   overflow: scroll;
+  border: var(--simple-table-border-width, 1px) var(--table-border-type, solid) var(--table-border-color, var(--tweak-text-block-background-color));
+  border-radius: var(--table-border-radius, 5px);
+  width: max-content;
 }
 
 [data-wm-plugin="simple-table"] table {
@@ -15,8 +17,6 @@
   text-align: var(--simple-table-text-align, left);
   table-layout: fixed;
   text-transform: none;
-  border: var(--simple-table-border-width, 1px) var(--table-border-type, solid) var(--table-border-color, var(--tweak-text-block-background-color));
-  border-radius: var(--table-border-radius, 5px);
 }
 
 [data-wm-plugin="simple-table"] td, [data-wm-plugin="simple-table"] th {
