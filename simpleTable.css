@@ -347,7 +347,7 @@ SimpleTable {
   display: none;
 }
 
-.code-block:has(SimpleTable) {
+.code-block:has([data-wm-plugin="simple-table) {
   overflow: scroll;
 }
 
