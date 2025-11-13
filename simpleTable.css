@@ -4,6 +4,10 @@
 * Development Lead, Abi Bacon
 **/
 
+[data-wm-plugin="simple-table] {
+  overflow: scroll;
+}
+
 [data-wm-plugin="simple-table"] .table-wrapper {
   margin: auto;
   overflow: scroll;
