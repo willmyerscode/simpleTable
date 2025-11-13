@@ -11,7 +11,7 @@
 }
 
 [data-wm-plugin="simple-table"] table {
-  width: 100%;
+  width: auto;
   text-align: var(--simple-table-text-align, left);
   table-layout: fixed;
   text-transform: none;
