@@ -61,7 +61,6 @@ class SimpleTable {
     }
 
     if (this.settings.stylePreset === "simple") {
-      console.log("working");
       this.plugin.classList.add("simple-layout");
     }
 
