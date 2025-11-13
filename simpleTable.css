@@ -347,6 +347,10 @@ SimpleTable {
   display: none;
 }
 
+.code-block:has(SimpleTable) {
+  overflow: scroll;
+}
+
 .sqs-edit-mode-active .code-block SimpleTable {
   color: transparent;
   background: transparent;
