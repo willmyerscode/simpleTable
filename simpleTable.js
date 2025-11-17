@@ -70,15 +70,14 @@ class SimpleTable {
       this.createVerticalLayout();
       this.tableWrapper.classList.add("vertical-view");
     } else if (this.settings.layout === "select") {
-      this.createSelectView();
-      this.settings.mobileLayout = '';
+      this.createDesktopSelectView();
       this.plugin.classList.add('desktop-select');
     }
 
   if (this.settings.mobileLayout === 'stack') {
       this.createStackView();
     } else if (this.settings.mobileLayout === 'select') {
-        this.createSelectView();
+        this.createMobileSelectView();
       } else if (this.settings.mobileLayout === 'overflow') {
           this.tableWrapper.classList.add("mobile-overflow");
       }
@@ -278,31 +277,35 @@ class SimpleTable {
   this.mobileView.classList.add('wm-table-stack-view');
   
   this.tableData.forEach(item => {
-    const card = document.createElement('div');
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wm-table-stack-wrapper');
+    
+    const card = document.createElement('table');
     card.classList.add('wm-table-stack-card');
 
     this.tableTitles.forEach(title => {
-      const row = document.createElement('div');
+      const row = document.createElement('tr');
       row.classList.add('wm-table-stack-row');
 
-      const titleEl = document.createElement('div');
+      const titleEl = document.createElement('th');
       titleEl.classList.add('wm-table-stack-title');
       titleEl.appendChild(this.parseTextWithLinks(title));
 
-      const valueEl = document.createElement('div');
+      const valueEl = document.createElement('td');
       valueEl.classList.add('wm-table-stack-value');
       valueEl.appendChild(item[title].element.cloneNode(true));
 
       row.appendChild(titleEl);
       row.appendChild(valueEl);
       card.appendChild(row);
+      wrapper.appendChild(card);
     });
 
-    this.mobileView.appendChild(card);
+    this.mobileView.appendChild(wrapper);
   });
 }
 
-  createSelectView() {
+  createMobileSelectView() {
     this.mobileView.innerHTML = '';
     this.mobileView.classList.add('wm-table-select-view');
     
@@ -310,6 +313,29 @@ class SimpleTable {
     const structure = this.createSelectViewStructure();
     this.mobileView.appendChild(structure.navigationContainer);
     this.mobileView.appendChild(structure.resultsContainer);
+    
+    // Store elements for later use
+    this.elements = structure.elements;
+    
+    // Get unique values for the first column
+    const firstTitle = this.tableTitles[0];
+    const uniqueValues = [...new Set(this.tableData.map(item => item[firstTitle].text))];
+    
+    // Add options and bind events
+    this.populateSelectOptions(uniqueValues, firstTitle);
+    this.bindDropdownEvents();
+    
+    // Show initial card
+    this.showCard(uniqueValues[0]);
+  }
+
+  createDesktopSelectView() {
+    this.table.classList.add('wm-table-select-view');
+    
+    // Create structure
+    const structure = this.createSelectViewStructure();
+    this.table.appendChild(structure.navigationContainer);
+    this.table.appendChild(structure.resultsContainer);
     
     // Store elements for later use
     this.elements = structure.elements;
