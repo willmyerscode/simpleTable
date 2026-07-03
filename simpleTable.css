@@ -134,7 +134,7 @@
   
   [data-wm-plugin="simple-table"] .wm-table-stack-wrapper {
     border: var(--simple-table-border-width, 2px) var(--simple-table-border-type, var(--table-border-type, solid)) var(--simple-table-border-color, var(--table-border-color, white));
-    border-radius: var(--simple-table-border-radius, var(--table-border-radius, 12px));
+    border-radius: var(--simple-table-border-radius, var(--table-border-radius, 0px));
   }
   
   [data-wm-plugin="simple-table"] .wm-table-stack-wrapper table tr th {
